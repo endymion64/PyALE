@@ -5,7 +5,6 @@ Created on Tue Mar 31 20:03:10 2015
 @author: pvrancx
 """
 
-
 from rlglue.agent import AgentLoader as AgentLoader
 
 

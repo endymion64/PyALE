@@ -17,22 +17,22 @@
 #$ -pe mt 4
 #
 #set various paths
-RLDIR=$HOME/Documents/Code/PyALE/src
-ALEDIR=$HOME/Documents/Projects/ALE/ale5
+RLDIR=$HOME/git/PyALE/src
+ALEDIR=$HOME/ALE
 LOGDIR=$HOME/Logs
 
 #Experimental configuration
 EXP_NAME="sarsa"
 EXPERIMENT="generic_experiment.py"
-EXPERIMENT_OPTIONS="--maxsteps 18000  --numeps 5500"
+EXPERIMENT_OPTIONS="--maxsteps 2000  --numeps 3000 --numtrials 5"
 AGENT="agents/ALESarsaAgent.py"
-AGENT_OPTIONS='--eps 0.05 --lambda_ 0.9 --alpha 0.5'
-ALE_OPTIONS="-game_controller rlglue  -frame_skip 5"
+AGENT_OPTIONS='--eps 0.05 --lambda_ 0.5 --alpha 0.1 --features RAM --actions 0 1 3 4'
+ALE_OPTIONS="-game_controller rlglue -repeat_action_probability 0.0 -frame_skip 30"
 GAME="space_invaders.bin"
 
 #######Imports#################
 source $HOME/.bash_profile
-module add java
+#module add java
 export PYTHONPATH=$RLDIR:$PYTHONPATH
 export RLGLUE_PORT=1028
 ###############################
@@ -41,7 +41,7 @@ mkdir -p "$LOGDIR/$EXP_NAME"
 
 cd $RLDIR
 #start rlglue
-rl_glue&
+rl_glue &
 #run agent
 python $AGENT $AGENT_OPTIONS --savepath "$LOGDIR/$EXP_NAME" > $LOGDIR/agent-$EXP_NAME.log 2>&1 &
 #run experiment
