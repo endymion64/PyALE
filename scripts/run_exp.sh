@@ -22,11 +22,11 @@ ALEDIR=$HOME/ALE
 LOGDIR=$HOME/Logs
 
 #Experimental configuration
-EXP_NAME="sarsa"
+EXP_NAME="er-sarsa"
 EXPERIMENT="generic_experiment.py"
-EXPERIMENT_OPTIONS="--maxsteps 2000  --numeps 3000 --numtrials 5"
-AGENT="agents/ALESarsaAgent.py"
-AGENT_OPTIONS='--eps 0.05 --lambda_ 0.5 --alpha 0.1 --features RAM --actions 0 1 3 4'
+EXPERIMENT_OPTIONS="--maxsteps 2000 --numeps 200 --numtrials 5"
+AGENT="agents/ALEERSarsaAgent.py"
+AGENT_OPTIONS='--eps 0.05 --lambda_ 0.5 --alpha 0.1 --features RAM --actions 0 1 3 4 --trajectory_length 100 --replays 10 --db_size 1000'
 ALE_OPTIONS="-game_controller rlglue -repeat_action_probability 0.0 -frame_skip 30"
 GAME="space_invaders.bin"
 

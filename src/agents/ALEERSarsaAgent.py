@@ -15,13 +15,13 @@ from agents.ALEAgent import ALEAgent
 
 import numpy as np
 
-class ALEER-SarsaAgent(ALEAgent):
+class ALEERSarsaAgent(ALEAgent):
     
     def __init__(self,alpha=0.1,lambda_=0.9,gamma=.999,eps=0.05,
                  agent_id=0,save_path='.',actions=None, db_size=1000,
                  trajectory_length=1, replays=1):
         #use full images and color mode
-        super(ALEER-SarsaAgent,self).__init__(actions,agent_id,save_path)
+        super(ALEERSarsaAgent,self).__init__(actions,agent_id,save_path)
         
         self.eps = eps
         self.name='ER-SARSA'
@@ -34,7 +34,7 @@ class ALEER-SarsaAgent(ALEAgent):
         self.replays = replays
 
     def agent_start(self,observation):
-        super(ALEER-SarsaAgent,self).agent_start(observation)
+        super(ALEERSarsaAgent,self).agent_start(observation)
         #reset trace
         self.trace = np.zeros_like(self.theta)
         #action selection
@@ -48,7 +48,7 @@ class ALEER-SarsaAgent(ALEAgent):
         
     
     def agent_init(self,taskSpec):
-        super(ALEER-SarsaAgent,self).agent_init(taskSpec)
+        super(ALEERSarsaAgent,self).agent_init(taskSpec)
         self.state_projector =  self.create_projector()
         self.theta = np.zeros((self.state_projector.num_features(),
                                 self.num_actions()))
@@ -128,7 +128,7 @@ class ALEER-SarsaAgent(ALEAgent):
         return a_ns  #a_ns is action index (not action value)
 
     def agent_step(self,reward, observation):
-        super(ALEER-SarsaAgent,self).agent_step(reward, observation)
+        super(ALEERSarsaAgent,self).agent_step(reward, observation)
         phi_ns = self.get_phi(observation)
         a_ns = self.step(reward,phi_ns)
         #log state data
@@ -165,14 +165,14 @@ class ALEER-SarsaAgent(ALEAgent):
 
              
     def agent_end(self,reward):
-        super(ALEER-SarsaAgent,self).agent_end(reward)
+        super(ALEERSarsaAgent,self).agent_end(reward)
         self.step(reward)
         self.learn_samples()
         
         
-class BasicALEER-SarsaAgent(ALEER-SarsaAgent):
+class BasicALEERSarsaAgent(ALEERSarsaAgent):
     def __init__(self,bg_file='../data/space_invaders/background.pkl',**kwargs):
-        super(BasicALEER-SarsaAgent,self).__init__(**kwargs)
+        super(BasicALEERSarsaAgent,self).__init__(**kwargs)
         self.background = bg_file
         
     def create_projector(self):
@@ -183,7 +183,7 @@ class BasicALEER-SarsaAgent(ALEER-SarsaAgent):
         return self.get_frame_data(obs)
 
     
-class RAMALEER-SarsaAgent(ALEER-SarsaAgent):
+class RAMALEERSarsaAgent(ALEERSarsaAgent):
     def create_projector(self):
         return RAMALEFeatures()
         
@@ -224,7 +224,7 @@ if __name__=="__main__":
         act = np.array(args.actions)
 
     if args.features == 'RAM':
-        AgentLoader.loadAgent(RAMALEER-SarsaAgent(agent_id=args.id,
+        AgentLoader.loadAgent(RAMALEERSarsaAgent(agent_id=args.id,
                                      alpha =args.alpha,
                                      lambda_=args.lambda_,
                                      eps =args.eps,
@@ -235,7 +235,7 @@ if __name__=="__main__":
                                      trajectory_length=args.trajectory_length,
                                      replays=args.replays))
     elif args.features == 'BASIC':
-        AgentLoader.loadAgent(BasicALEER-SarsaAgent(agent_id=args.id,
+        AgentLoader.loadAgent(BasicALEERSarsaAgent(agent_id=args.id,
                                      alpha =args.alpha,
                                      lambda_=args.lambda_,
                                      eps =args.eps,
