@@ -56,7 +56,7 @@ class ALEERSarsaAgent(ALEAgent):
         # Sample database
         self.k = 0
         self.l = 1 
-        self.db = np.zeros((self.sample_size,4))
+        self.db = np.zeros((self.db_size,4), dtype=object)
       
     #these methods determine how atari observations are processed
     def create_projector(self):
@@ -112,7 +112,7 @@ class ALEERSarsaAgent(ALEAgent):
 
     def store_sample(self, phi, a, phi_ns, reward):
         i = self.k % self.db_size
-        self.db[i,:] = np.array([phi, a, phi_ns, reward])
+        self.db[i] = np.array([phi, a, phi_ns, reward])
         return
         
         
