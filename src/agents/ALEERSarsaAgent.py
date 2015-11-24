@@ -146,7 +146,7 @@ class ALEERSarsaAgent(ALEAgent):
             samples_in_db = self.db_size
         for i in np.arange(K):                 
             ind = np.random.randint(samples_in_db)
-            sample = self.db[ind,:]
+            sample = self.db[ind]
             phi = sample[0]
             a = sample[1]
             phi_ns = sample[2]
