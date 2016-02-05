@@ -22,9 +22,9 @@ ALEDIR=$HOME/ALE
 LOGDIR=$HOME/Logs
 
 #Experimental configuration
-EXP_NAME="sarsa-shaping"
+EXP_NAME="sarsa-shaping-less"
 EXPERIMENT="generic_experiment.py"
-EXPERIMENT_OPTIONS="--maxsteps 2000 --numeps 20 --numtrials 1"
+EXPERIMENT_OPTIONS="--maxsteps 2000 --numeps 3000 --numtrials 5"
 AGENT="agents/ALESarsaShapingAgent.py"
 #AGENT_OPTIONS='--eps 0.05 --lambda_ 0.5 --alpha 0.1 --features RAM --actions 0 1 3 4  --trajectory_length 100 --replays 10 --db_size 1000'
 AGENT_OPTIONS='--eps 0.05 --lambda_ 0.5 --alpha 0.1 --potential less_enemies --actions 0 1 3 4'

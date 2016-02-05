@@ -7,8 +7,6 @@ Created on Tue Mar 31 20:03:10 2015
 
 from rlglue.agent import AgentLoader as AgentLoader
 
-
-
 import argparse
 
 from util.ALEFeatures import BasicALEFeatures,RAMALEFeatures
